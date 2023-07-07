@@ -1,0 +1,114 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Racing+Sans+One&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.hero {
+  width: 100vw;
+  height: 100vh;
+  max-height: 1600px;
+  max-width: 2400px;
+  min-height: 800px;
+  background-image: linear-gradient(rgba(2, 47, 64, 0.2), rgba(2, 47, 64, 0.2)),
+    url(img/hero-pic.jpg);
+  background-size: auto, cover;
+  background-position: 0;
+}
+
+.container {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.logo {
+  color: #f2f4f3;
+  margin-top: 0;
+  font-family: Racing Sans One, sans-serif;
+  font-size: 80px;
+  line-height: 101px;
+}
+
+.nav-bar-link {
+  color: #f2f4f3;
+  letter-spacing: 0.22px;
+  font-size: 22px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
+
+.hero-heading {
+  color: #f2f4f3;
+  text-align: center;
+  margin-top: 200px;
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 120px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  margin-top: 30px;
+}
+
+.search-bar {
+  width: 440px;
+  height: 60px;
+  color: #022140;
+  text-align: center;
+  background-color: rgba(242, 244, 243, 0.7);
+  border: 1px solid rgba(2, 47, 64, 0.5);
+  border-radius: 4px;
+  font-size: 26px;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+
+.search-button {
+  color: #f2f4f3;
+  background-color: #022f40;
+  border: 1px solid rgba(242, 244, 243, 0.2);
+  border-radius: 4px;
+  padding: 10px 30px;
+  font-size: 20px;
+  display: block;
+  cursor: pointer;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 991px) {
+  .hero {
+    min-height: 800px;
+  }
+}
