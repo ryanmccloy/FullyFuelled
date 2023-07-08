@@ -5,6 +5,7 @@
 :root {
   --perusion-blue: #022f40;
   --white-smoke: #f2f4f3;
+  --blackish: #192321;
 }
 
 body {
@@ -13,6 +14,7 @@ body {
   box-sizing: border-box;
   font-family: Poppins, sans-serif;
   font-size: 18px;
+  color: var(--blackish);
   font-weight: 400;
   background-color: var(--white-smoke);
 }
@@ -28,7 +30,10 @@ body {
   height: 100vh;
   max-height: 1600px;
   min-height: 700px;
-  background-image: linear-gradient(rgba(2, 47, 64, 0.2), rgba(2, 47, 64, 0.2)),
+  background-image: linear-gradient(
+      rgba(55, 26, 21, 0.3),
+      rgba(55, 26, 21, 0.3)
+    ),
     url(img/hero-pic.jpg);
   background-size: auto, cover;
   background-position: 0;
@@ -58,7 +63,7 @@ body {
 }
 
 .logo {
-  color: var(--perusion-blue);
+  color: var(--blackish);
   margin-top: 0;
   font-family: Racing Sans One, sans-serif;
   font-size: 80px;
@@ -66,11 +71,16 @@ body {
 }
 
 .nav-bar-link {
-  color: var(--perusion-blue);
+  color: var(--blackish);
   letter-spacing: 0.22px;
   font-size: 22px;
   font-weight: 400;
   text-decoration: none;
+}
+
+.nav-bar-link:hover {
+  color: var(--white-smoke);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-links {
@@ -102,7 +112,7 @@ body {
 .search-bar {
   width: 440px;
   height: 60px;
-  color: var(--perusion-blue);
+  color: var(--blackish);
   text-align: center;
   background-color: rgba(242, 244, 243, 0.7);
   border: 1px solid rgba(2, 47, 64, 0.5);
@@ -116,13 +126,21 @@ body {
 
 .search-button {
   color: var(--white-smoke);
-  background-color: var(--perusion-blue);
+  background-color: #de5233;
   border: 1px solid rgba(242, 244, 243, 0.2);
   border-radius: 4px;
   padding: 10px 30px;
   font-size: 20px;
   display: block;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  opacity: 90%;
+  margin-top: 15px;
+}
+
+.search-button:hover {
+  color: var(--blackish);
+  background-color: var(--white-smoke);
 }
 
 .map-box {
@@ -163,13 +181,13 @@ body {
   position: absolute;
   top: 0%;
   left: 25%;
-  color: var(--perusion-blue);
+  color: var(--blackish);
 }
 
 .stop-save {
   width: 100px;
   height: 40px;
-  background-color: var(--perusion-blue);
+  background-color: var(--blackish);
   color: var(--white-smoke);
   border-radius: 4px;
   margin-top: 30px;
@@ -178,13 +196,76 @@ body {
 
 /* JS Manipulation Classes */
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 .my-trips-link {
   position: absolute;
   right: 5px;
+}
+
+.model {
+  background-color: var(--blackish);
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid var(--white-smoke);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.model-form {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.model-input {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 30px;
+}
+
+.model-input input {
+  font-size: 20px;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+
+.model-input input:focus {
+  outline: none;
+}
+
+#email {
+  width: 100%;
+  height: 100%;
+}
+
+#password {
+  width: 100%;
+  height: 100%;
+}
+
+.model-button {
+  color: var(--white-smoke);
+  background-color: var(--blackish);
+  border: 1px solid var(--white-smoke);
+  border-radius: 4px;
+  padding: 10px 30px;
+  font-size: 20px;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.model-button:hover {
+  color: var(--blackish);
+  background-color: var(--white-smoke);
 }
 
 .stop-box {
@@ -196,7 +277,7 @@ body {
 
 .stop {
   height: 120px;
-  background-color: var(--perusion-blue);
+  background-color: var(--blackish);
   margin-top: 15px;
   display: flex;
   align-items: center;
@@ -205,7 +286,7 @@ body {
 
 .stop-info {
   background-color: var(--white-smoke);
-  border: 1px solid var(--perusion-blue);
+  border: 1px solid var(--blackish);
   padding: 30px;
   display: flex;
   flex-direction: column;
