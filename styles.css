@@ -148,6 +148,10 @@ body {
   margin-top: 1%;
 }
 
+.trip-stops {
+  padding-bottom: 90px;
+}
+
 .pin {
   color: var(--white-smoke);
   font-size: 60px;
@@ -160,6 +164,16 @@ body {
   top: 0%;
   left: 25%;
   color: var(--perusion-blue);
+}
+
+.stop-save {
+  width: 100px;
+  height: 40px;
+  background-color: var(--perusion-blue);
+  color: var(--white-smoke);
+  border-radius: 4px;
+  margin-top: 30px;
+  cursor: pointer;
 }
 
 /* JS Manipulation Classes */
@@ -175,7 +189,9 @@ body {
 
 .stop-box {
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .stop {
@@ -184,12 +200,16 @@ body {
   margin-top: 15px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .stop-info {
   background-color: var(--white-smoke);
   border: 1px solid var(--perusion-blue);
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Media Queries */
