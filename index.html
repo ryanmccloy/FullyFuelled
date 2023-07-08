@@ -8,8 +8,8 @@
     <title>Fully Fuelled</title>
   </head>
   <body>
-    <section class="hero">
-      <div class="container">
+    <section class="section hero">
+      <div class="container hero-container">
         <div class="nav-bar">
           <div class="logo">Fully Fuelled</div>
           <div class="nav-links">
@@ -20,10 +20,19 @@
         </div>
         <h1 class="hero-heading">Where are you going?</h1>
         <form class="search-form">
-          <input class="search-bar" type="text" name="location" />
+          <input
+            class="search-bar"
+            type="text"
+            name="location"
+            autocomplete="off"
+          />
           <button class="search-button" type="submit">Start Planning</button>
         </form>
+        <div class="map"></div>
       </div>
+    </section>
+    <section class="section trip-stops">
+      <div class="container"></div>
     </section>
   </body>
 </html>
