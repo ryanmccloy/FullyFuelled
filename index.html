@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="js/Controller.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c2178b4ef2.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Fully Fuelled</title>
   </head>
   <body>
@@ -28,11 +32,31 @@
           />
           <button class="search-button" type="submit">Start Planning</button>
         </form>
-        <div class="map"></div>
+        <div class="map-box hidden">
+          <div class="map"></div>
+          <p class="distance">Total Distance: xxx</p>
+        </div>
       </div>
     </section>
-    <section class="section trip-stops">
-      <div class="container"></div>
+    <section class="section trip-stops hidden">
+      <div class="container">
+        <div class="stop-box">
+          <div class="stop">
+            <div class="pin">
+              <i class="fa-solid fa-location-pin"></i>
+              <span>1</span>
+            </div>
+          </div>
+          <div class="stop-info">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
+              adipisci atque vero cum soluta ipsam aliquid rerum maxime, ad
+              numquam nam iusto doloribus sunt perspiciatis exercitationem
+              delectus aperiam quam repellendus!
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   </body>
 </html>

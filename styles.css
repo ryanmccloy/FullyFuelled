@@ -10,24 +10,24 @@
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: Poppins, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   background-color: var(--white-smoke);
 }
 
 .section {
-  max-width: 1600px;
+  width: calc(100vw - (100vw - 100%));
+  max-width: 2400px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .hero {
-  width: 100vw;
   height: 100vh;
   max-height: 1600px;
-  max-width: 2400px;
-  min-height: 800px;
+  min-height: 700px;
   background-image: linear-gradient(rgba(2, 47, 64, 0.2), rgba(2, 47, 64, 0.2)),
     url(img/hero-pic.jpg);
   background-size: auto, cover;
@@ -125,24 +125,71 @@ body {
   cursor: pointer;
 }
 
-.map {
-  background-color: var(--white-smoke);
-  height: calc(100vh - 310px);
-  width: calc(100% - 120px);
+.map-box {
   position: absolute;
   top: 190px;
+  width: calc(100% - 120px);
+  height: calc(100vh - 250px);
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.map {
+  background-color: var(--white-smoke);
   border-radius: 4px;
+  height: 95%;
+  width: 100%;
+}
+
+.distance {
+  background-color: white;
+  margin-top: 1%;
+}
+
+.pin {
+  color: var(--white-smoke);
+  font-size: 60px;
+  margin-left: 30px;
+  position: relative;
+}
+
+.pin span {
+  position: absolute;
+  top: 0%;
+  left: 25%;
+  color: var(--perusion-blue);
 }
 
 /* JS Manipulation Classes */
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 .my-trips-link {
   position: absolute;
-  right: 0;
+  right: 5px;
+}
+
+.stop-box {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.stop {
+  height: 120px;
+  background-color: var(--perusion-blue);
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.stop-info {
+  background-color: var(--white-smoke);
+  border: 1px solid var(--perusion-blue);
+  padding: 30px;
 }
 
 /* Media Queries */
