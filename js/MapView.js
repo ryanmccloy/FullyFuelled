@@ -1,7 +1,6 @@
 "use strict";
 
 // Google API
-const MAP_API = "AIzaSyDD3U4qeMcJC1qncMwsD_MAkBzY9erb8DE";
 
 // Variables
 const Map = document.querySelector(".map");
