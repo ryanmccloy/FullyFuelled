@@ -6,6 +6,7 @@ const LogInButton = document.querySelector(".log-in");
 const SignUpModel = document.querySelector(".sign-up-model");
 const LogInModel = document.querySelector(".log-in-model");
 const Overlay = document.querySelector(".overlay");
+const Logo = document.querySelector(".logo");
 
 export default class HeroView {
   constructor() {
@@ -14,6 +15,12 @@ export default class HeroView {
     this.SignUpModel = SignUpModel;
     this.LogInModel = LogInModel;
     this.Overlay = Overlay;
+    this.Logo = Logo;
+  }
+
+  // Resetting Hero Section
+  resetHeroSection(handler) {
+    this.Logo.addEventListener("click", handler);
   }
 
   // Showing Sign Up Model
