@@ -27,15 +27,28 @@ export default class HeroView {
     this.Overlay.classList.add("hidden");
   }
 
+  // Showing Log In Model
+  showLogInModel(handler) {
+    this.LogInButton.addEventListener("click", handler);
+  }
+
+  // Closing Log In Model
+  closeLogInModel() {
+    this.LogInModel.classList.add("hidden");
+    this.Overlay.classList.add("hidden");
+  }
+
   // Initialize Event Listeners
   initializeEventListeners() {
-    // Close Sign Up Model Using Overlay
+    // Close Models Using Overlay
     this.Overlay.addEventListener("click", () => this.closeSignUpModel());
+    this.Overlay.addEventListener("click", () => this.closeLogInModel());
 
-    // Close Sign Up Model Using Escape Key
+    // Close Models Using Escape Key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         this.closeSignUpModel();
+        this.closeLogInModel();
       }
     });
   }

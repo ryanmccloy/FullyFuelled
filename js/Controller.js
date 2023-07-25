@@ -12,7 +12,13 @@ const showSignUpModelHandler = function () {
   heroView.Overlay.classList.remove("hidden");
 };
 
+const showLogInModelHandler = function () {
+  heroView.LogInModel.classList.remove("hidden");
+  heroView.Overlay.classList.remove("hidden");
+};
+
 ///////////////
 
 heroView.showSignUpModel(showSignUpModelHandler);
+heroView.showLogInModel(showLogInModelHandler);
 heroView.initializeEventListeners();
