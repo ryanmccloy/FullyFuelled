@@ -3,6 +3,7 @@
 // Imports
 import HeroView from "./HeroView.js";
 import MapView from "./MapView.js";
+import MAPS_API_KEY from "./Config.js";
 
 // Instantiate
 const heroView = new HeroView();
@@ -19,7 +20,8 @@ const showLogInModelHandler = function () {
   heroView.Overlay.classList.remove("hidden");
 };
 
-const showMapBoxHandler = function () {
+const showMapBoxHandler = function (event) {
+  event.preventDefault();
   mapView.MapBox.classList.remove("hidden");
   document.body.classList.add("map-box-visible");
 };
@@ -28,6 +30,10 @@ const resetHeroSectionHandler = function () {
   mapView.MapBox.classList.add("hidden");
   document.body.classList.remove("map-box-visible");
 };
+
+// Controller Class
+
+export default class Controller {}
 
 /////////////// Hero
 
