@@ -88,6 +88,74 @@ export default class Controller {
       center: { lat: 51.1784, lng: -115.5708 },
       zoom: 3,
     });
+
+    // Event listener for map
+    this.map.addListener("click", (event) => {
+      this.addMarker(event.latLng);
+    });
+  }
+
+  // Add marker on map
+  addMarker(location) {
+    // Create a marker
+    const marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+    });
+
+    // Store user's input for this marker
+    let userInput = "";
+
+    // Create an InfoWindow
+    const infowindow = new google.maps.InfoWindow();
+
+    // Function to set the InfoWindow content to a form with the user's input
+    const setInfoWindowForm = () => {
+      infowindow.setContent(`
+      <form id="markerForm">
+          <input id="markerInput" type="text" placeholder="Start planning..." value="${userInput}" />
+          <input type="submit" value="Save" />
+      </form>
+      `);
+    };
+
+    // Set the InfoWindow content initially
+    setInfoWindowForm();
+
+    // Open the info window immediately
+    infowindow.open(this.map, marker);
+
+    // Listen for the form submit event in the InfoWindow
+    google.maps.event.addListener(infowindow, "domready", () => {
+      document.getElementById("markerForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        // Get the user's input
+        userInput = document.getElementById("markerInput").value;
+        // Set the InfoWindow's content to the user's input
+        infowindow.setContent(userInput);
+      });
+    });
+
+    // Add a click listener to the marker to open the InfoWindow
+    marker.addListener("click", () => {
+      setInfoWindowForm();
+      infowindow.open(this.map, marker);
+
+      // Add a delete button to the form
+      infowindow.setContent(
+        infowindow.getContent() +
+          '<button id="deleteMarker">Remove Stop</button>'
+      );
+
+      // When InfoWindow is ready, add a click listener to the delete button
+      google.maps.event.addListener(infowindow, "domready", () => {
+        document
+          .getElementById("deleteMarker")
+          .addEventListener("click", () => {
+            marker.setMap(null);
+          });
+      });
+    });
   }
 }
 
