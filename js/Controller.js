@@ -33,11 +33,34 @@ export default class Controller {
 
   showMapBoxHandler = function (event) {
     event.preventDefault();
+
+    // Get location from input
+    const location = document.querySelector(".search-bar").value;
+
+    // Coords of Input
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: location }, (results, status) => {
+      if (status === "OK") {
+        // Set maps centre to geocoding result
+        const mapLocation = results[0].geometry.location;
+        this.map.panTo(mapLocation);
+
+        setTimeout(() => {
+          this.map.setZoom(13);
+        }, 1500);
+      } else {
+        alert(`Couldn't find location! Status: ${status}`);
+      }
+    });
+
+    // Manipulate CSS
     mapView.MapBox.classList.remove("hidden");
     document.body.classList.add("map-box-visible");
-  };
+  }.bind(this);
 
   resetHeroSectionHandler = function () {
+    document.querySelector(".search-bar").value = "";
+    this.map.setZoom(3);
     mapView.MapBox.classList.add("hidden");
     document.body.classList.remove("map-box-visible");
   };
@@ -57,16 +80,14 @@ export default class Controller {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPS_API_KEY}&libraries=places&callback=initMap`;
     script.defer = true;
     document.head.appendChild(script);
-    console.log("api");
   }
 
   // Initialize map
   initMap() {
     this.map = new google.maps.Map(mapView.Map, {
       center: { lat: 51.1784, lng: -115.5708 },
-      zoom: 12,
+      zoom: 3,
     });
-    console.log(controller.map);
   }
 }
 
