@@ -49,10 +49,30 @@ export default class Controller {
     heroView.resetHeroSection(this.resetHeroSectionHandler);
     mapView.showMapBox(this.showMapBoxHandler);
   }
+
+  // Dynamically load the Google Maps API
+  loadGoogleMapsAPI() {
+    window.initMap = this.initMap.bind(this);
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPS_API_KEY}&libraries=places&callback=initMap`;
+    script.defer = true;
+    document.head.appendChild(script);
+    console.log("api");
+  }
+
+  // Initialize map
+  initMap() {
+    this.map = new google.maps.Map(mapView.Map, {
+      center: { lat: 51.1784, lng: -115.5708 },
+      zoom: 12,
+    });
+    console.log(controller.map);
+  }
 }
 
 //////////////
 
 const controller = new Controller();
+controller.loadGoogleMapsAPI();
 controller.initializeEventListeners();
 heroView.initializeEventListeners();
