@@ -112,10 +112,12 @@ export default class Controller {
     // Function to set the InfoWindow content to a form with the user's input
     const setInfoWindowForm = () => {
       infowindow.setContent(`
-      <form id="markerForm">
-          <input id="markerInput" type="text" placeholder="Start planning..." value="${userInput}" />
-          <input type="submit" value="Save" />
+      
+      <form id="marker-form">
+          <textarea id="marker-input" type="text" placeholder="Start planning...">${userInput}</textarea>
+          <input id="info-save" type="submit" value="Save" />
       </form>
+      
       `);
     };
 
@@ -127,12 +129,14 @@ export default class Controller {
 
     // Listen for the form submit event in the InfoWindow
     google.maps.event.addListener(infowindow, "domready", () => {
-      document.getElementById("markerForm").addEventListener("submit", (e) => {
+      document.getElementById("marker-form").addEventListener("submit", (e) => {
         e.preventDefault();
         // Get the user's input
-        userInput = document.getElementById("markerInput").value;
+        userInput = document.getElementById("marker-input").value;
         // Set the InfoWindow's content to the user's input
         infowindow.setContent(userInput);
+        // Close the infowindow
+        infowindow.close();
       });
     });
 
