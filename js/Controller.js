@@ -3,6 +3,7 @@
 // Imports
 import HeroView from "./HeroView.js";
 import MapView from "./MapView.js";
+import User from "./Model.js";
 import MAPS_API_KEY from "./Config.js";
 
 // Instantiate
@@ -18,6 +19,7 @@ export default class Controller {
     this.showLogInModelHandler = this.showLogInModelHandler.bind(this);
     this.showMapBoxHandler = this.showMapBoxHandler.bind(this);
     this.resetHeroSectionHandler = this.resetHeroSectionHandler.bind(this);
+    this.signupUserHandler = this.signupUserHandler.bind(this);
   }
 
   // Event Handlers
@@ -65,11 +67,20 @@ export default class Controller {
     document.body.classList.remove("map-box-visible");
   };
 
+  signupUserHandler(email, password) {
+    const usersJson = localStorage.getItem("users");
+    const users = usersJson ? JSON.parse(usersJson) : [];
+    const user = new User(email, password);
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+  }
+
   // Initialize the event listeners
   initializeEventListeners() {
     heroView.showSignUpModel(this.showSignUpModelHandler);
     heroView.showLogInModel(this.showLogInModelHandler);
     heroView.resetHeroSection(this.resetHeroSectionHandler);
+    heroView.handleSignUpForm(this.signupUserHandler);
     mapView.showMapBox(this.showMapBoxHandler);
   }
 

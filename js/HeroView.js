@@ -7,6 +7,9 @@ const SignUpModel = document.querySelector(".sign-up-model");
 const LogInModel = document.querySelector(".log-in-model");
 const Overlay = document.querySelector(".overlay");
 const Logo = document.querySelector(".logo");
+const SignUpForm = document.querySelector(".sign-up-form");
+const MyTripsButton = document.querySelector(".my-trips-link");
+const SignOutButton = document.querySelector(".sign-out-link");
 
 export default class HeroView {
   constructor() {
@@ -16,6 +19,9 @@ export default class HeroView {
     this.LogInModel = LogInModel;
     this.Overlay = Overlay;
     this.Logo = Logo;
+    this.SignUpForm = SignUpForm;
+    this.MyTripsButton = MyTripsButton;
+    this.SignOutButton = SignOutButton;
   }
 
   // Resetting Hero Section
@@ -45,6 +51,10 @@ export default class HeroView {
     this.Overlay.classList.add("hidden");
   }
 
+  // Showing My Trips Model
+
+  // Closing My Trips Model
+
   // Initialize Event Listeners
   initializeEventListeners() {
     // Close Models Using Overlay
@@ -57,6 +67,33 @@ export default class HeroView {
         this.closeSignUpModel();
         this.closeLogInModel();
       }
+    });
+  }
+
+  // Change nav bar when signed in
+  updateNavBar(isLoggedIn) {
+    if (isLoggedIn) {
+      this.SignUpButton.classList.add("hidden");
+      this.LogInButton.classList.add("hidden");
+      this.MyTripsButton.classList.remove("hidden");
+      this.SignOutButton.classList.remove("hidden");
+    } else {
+      this.SignUpButton.classList.remove("hidden");
+      this.LogInButton.classList.remove("hidden");
+      this.MyTripsButton.classList.add("hidden");
+      this.SignOutButton.classList.add("hidden");
+    }
+  }
+
+  // User signing up
+  handleSignUpForm(handler) {
+    SignUpForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.querySelector(".sign-up-email").value;
+      const password = document.querySelector(".sign-up-password").value;
+      handler(email, password);
+      this.closeSignUpModel();
+      this.updateNavBar(true);
     });
   }
 }
