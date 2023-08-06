@@ -20,6 +20,9 @@ export default class Controller {
     this.showMapBoxHandler = this.showMapBoxHandler.bind(this);
     this.resetHeroSectionHandler = this.resetHeroSectionHandler.bind(this);
     this.signupUserHandler = this.signupUserHandler.bind(this);
+    this.logInUserHandler = this.logInUserHandler.bind(this);
+    this.signOutUserHandler = this.signOutUserHandler.bind(this);
+    this.currentUser;
   }
 
   // Event Handlers
@@ -30,6 +33,11 @@ export default class Controller {
 
   showLogInModelHandler = function () {
     heroView.LogInModel.classList.remove("hidden");
+    heroView.Overlay.classList.remove("hidden");
+  };
+
+  showMyTripsModelHandler = function () {
+    heroView.TripModel.classList.remove("hidden");
     heroView.Overlay.classList.remove("hidden");
   };
 
@@ -73,14 +81,49 @@ export default class Controller {
     const user = new User(email, password);
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
+    this.currentUser = user;
+    console.log(this.currentUser);
   }
+
+  logInUserHandler(email, password) {
+    const usersJson = localStorage.getItem("users");
+    let users = [];
+
+    if (usersJson !== null) {
+      users = JSON.parse(usersJson);
+      console.log(users);
+    }
+
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (user) {
+      this.currentUser = user;
+      heroView.closeLogInModel();
+      heroView.updateNavBar(true);
+      console.log(this.currentUser);
+    } else {
+      prompt("Account not found, please create one! ✈️");
+    }
+  }
+
+  signOutUserHandler = function () {
+    heroView.updateNavBar(false);
+    this.resetHeroSectionHandler();
+    this.currentUser = null;
+    console.log(this.currentUser);
+  };
 
   // Initialize the event listeners
   initializeEventListeners() {
     heroView.showSignUpModel(this.showSignUpModelHandler);
     heroView.showLogInModel(this.showLogInModelHandler);
     heroView.resetHeroSection(this.resetHeroSectionHandler);
+    heroView.showMyTripsModel(this.showMyTripsModelHandler);
     heroView.handleSignUpForm(this.signupUserHandler);
+    heroView.handleLogInForm(this.logInUserHandler);
+    heroView.handleSignOut(this.signOutUserHandler);
     mapView.showMapBox(this.showMapBoxHandler);
   }
 
