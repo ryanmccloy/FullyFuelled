@@ -23,6 +23,7 @@ export default class Controller {
     this.logInUserHandler = this.logInUserHandler.bind(this);
     this.signOutUserHandler = this.signOutUserHandler.bind(this);
     this.currentUser;
+    this.signedin = false;
   }
 
   // Event Handlers
@@ -61,6 +62,24 @@ export default class Controller {
       } else {
         alert(`Couldn't find location! Status: ${status}`);
       }
+
+      if (this.signedin) {
+        this.currentUser.trips.push(location);
+        // Save the updated currentUser to localStorage
+        const usersJson = localStorage.getItem("users");
+        const users = usersJson ? JSON.parse(usersJson) : [];
+
+        // Find the index of the currentUser in the users array
+        const index = users.findIndex(
+          (user) => user.email === this.currentUser.email
+        );
+        if (index !== -1) {
+          users[index] = this.currentUser; // Replace the old data with the updated one
+          localStorage.setItem("users", JSON.stringify(users)); // Save back to localStorage
+        }
+
+        console.log(this.currentUser); // Fixed typo here, added "this."
+      }
     });
 
     // Manipulate CSS
@@ -82,7 +101,9 @@ export default class Controller {
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
     this.currentUser = user;
+    this.signedin = true;
     console.log(this.currentUser);
+    console.log(this.signedin);
   }
 
   logInUserHandler(email, password) {
@@ -106,6 +127,8 @@ export default class Controller {
     } else {
       prompt("Account not found, please create one! ✈️");
     }
+    this.signedin = true;
+    console.log(this.signedin);
   }
 
   signOutUserHandler = function () {
@@ -113,6 +136,8 @@ export default class Controller {
     this.resetHeroSectionHandler();
     this.currentUser = null;
     console.log(this.currentUser);
+    this.signedin = false;
+    console.log(this.signedin);
   };
 
   // Initialize the event listeners
