@@ -42,6 +42,7 @@ export default class HeroView {
   closeSignUpModel() {
     this.SignUpModel.classList.add("hidden");
     this.Overlay.classList.add("hidden");
+    this.resetModalInputs();
   }
 
   // Showing Log In Model
@@ -53,6 +54,7 @@ export default class HeroView {
   closeLogInModel() {
     this.LogInModel.classList.add("hidden");
     this.Overlay.classList.add("hidden");
+    this.resetModalInputs();
   }
 
   // Showing My Trips Model
@@ -63,6 +65,18 @@ export default class HeroView {
   closeMyTripsModel() {
     this.TripModel.classList.add("hidden");
     this.Overlay.classList.add("hidden");
+  }
+
+  resetModalInputs() {
+    const emailSignUp = document.querySelector(".sign-up-email");
+    const passwordSignUp = document.querySelector(".sign-up-password");
+    const emailLogIn = document.querySelector(".log-in-email");
+    const passwordLogIn = document.querySelector(".log-in-password");
+
+    emailSignUp.value = "";
+    passwordSignUp.value = "";
+    emailLogIn.value = "";
+    passwordLogIn.value = "";
   }
 
   // Initialize Event Listeners

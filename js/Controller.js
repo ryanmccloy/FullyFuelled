@@ -65,7 +65,6 @@ export default class Controller {
 
       if (this.signedin) {
         this.currentUser.trips.push(location);
-        // Save the updated currentUser to localStorage
         const usersJson = localStorage.getItem("users");
         const users = usersJson ? JSON.parse(usersJson) : [];
 
@@ -78,7 +77,7 @@ export default class Controller {
           localStorage.setItem("users", JSON.stringify(users)); // Save back to localStorage
         }
 
-        console.log(this.currentUser); // Fixed typo here, added "this."
+        this.tripBoxAppend(location);
       }
     });
 
@@ -128,16 +127,20 @@ export default class Controller {
       prompt("Account not found, please create one! ✈️");
     }
     this.signedin = true;
-    console.log(this.signedin);
+
+    // Displaying trips in my trips
+
+    this.currentUser.trips.forEach((trip) => {
+      this.tripBoxAppend(trip);
+    });
   }
 
   signOutUserHandler = function () {
     heroView.updateNavBar(false);
     this.resetHeroSectionHandler();
     this.currentUser = null;
-    console.log(this.currentUser);
     this.signedin = false;
-    console.log(this.signedin);
+    document.querySelector(".trip-box").innerHTML = "";
   };
 
   // Initialize the event listeners
@@ -240,6 +243,16 @@ export default class Controller {
       });
     });
   }
+
+  tripBoxAppend = function (trip) {
+    const tripDiv = document.createElement("div");
+    tripDiv.className = "trip";
+    const tripSpan = document.createElement("span");
+    tripSpan.textContent = trip;
+
+    tripDiv.appendChild(tripSpan);
+    document.querySelector(".trip-box").appendChild(tripDiv);
+  };
 }
 
 //////////////
