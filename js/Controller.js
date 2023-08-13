@@ -24,6 +24,7 @@ export default class Controller {
     this.signOutUserHandler = this.signOutUserHandler.bind(this);
     this.currentUser;
     this.signedin = false;
+    this.markersArray = [];
   }
 
   // Event Handlers
@@ -49,6 +50,27 @@ export default class Controller {
     const location = document.querySelector(".search-bar").value;
 
     // Coords of Input
+    this.mapGeocoder(location);
+
+    if (this.signedin && !this.currentUser.trips.includes(location)) {
+      this.currentUser.trips.push(location);
+      const usersJson = localStorage.getItem("users");
+      const users = usersJson ? JSON.parse(usersJson) : [];
+
+      // Find the index of the currentUser in the users array
+      const index = users.findIndex(
+        (user) => user.email === this.currentUser.email
+      );
+      if (index !== -1) {
+        users[index] = this.currentUser; // Replace the old data with the updated one
+        localStorage.setItem("users", JSON.stringify(users)); // Save back to localStorage
+      }
+
+      this.tripBoxAppend(location);
+    }
+  }.bind(this);
+
+  mapGeocoder(location) {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: location }, (results, status) => {
       if (status === "OK") {
@@ -62,29 +84,11 @@ export default class Controller {
       } else {
         alert(`Couldn't find location! Status: ${status}`);
       }
-
-      if (this.signedin) {
-        this.currentUser.trips.push(location);
-        const usersJson = localStorage.getItem("users");
-        const users = usersJson ? JSON.parse(usersJson) : [];
-
-        // Find the index of the currentUser in the users array
-        const index = users.findIndex(
-          (user) => user.email === this.currentUser.email
-        );
-        if (index !== -1) {
-          users[index] = this.currentUser; // Replace the old data with the updated one
-          localStorage.setItem("users", JSON.stringify(users)); // Save back to localStorage
-        }
-
-        this.tripBoxAppend(location);
-      }
     });
 
-    // Manipulate CSS
     mapView.MapBox.classList.remove("hidden");
     document.body.classList.add("map-box-visible");
-  }.bind(this);
+  }
 
   resetHeroSectionHandler = function () {
     document.querySelector(".search-bar").value = "";
@@ -141,6 +145,8 @@ export default class Controller {
     this.currentUser = null;
     this.signedin = false;
     document.querySelector(".trip-box").innerHTML = "";
+    this.clearAllMarkers();
+    this.resetMap();
   };
 
   // Initialize the event listeners
@@ -184,6 +190,8 @@ export default class Controller {
       position: location,
       map: this.map,
     });
+    this.markersArray.push(marker);
+    console.log(marker);
 
     // Store user's input for this marker
     let userInput = "";
@@ -196,8 +204,9 @@ export default class Controller {
       infowindow.setContent(`
       
       <form id="marker-form">
-          <textarea id="marker-input" type="text" placeholder="Start planning...">${userInput}</textarea>
+          <textarea id="marker-input" type="text" placeholder="Start Planning...">${userInput}</textarea>
           <input id="info-save" type="submit" value="Save" />
+          <button id="deleteMarker">Remove Stop</button>
       </form>
       
       `);
@@ -219,6 +228,33 @@ export default class Controller {
         infowindow.setContent(userInput);
         // Close the infowindow
         infowindow.close();
+
+        // Storing markers to users local storage
+        if (this.signedin) {
+          this.currentUser.markers.push({
+            position: {
+              lat: location.lat(),
+              lng: location.lng(),
+            },
+            content: userInput,
+          });
+          console.log(this.currentUser);
+          const usersJson = localStorage.getItem("users");
+          const users = usersJson ? JSON.parse(usersJson) : [];
+
+          // Find the index of the currentUser in the users array
+          const index = users.findIndex(
+            (user) => user.email === this.currentUser.email
+          );
+          if (index !== -1) {
+            users[index] = this.currentUser; // Replace the old data with the updated one
+            localStorage.setItem("users", JSON.stringify(users)); // Save back to localStorage
+          }
+        }
+      });
+
+      document.getElementById("deleteMarker").addEventListener("click", () => {
+        marker.setMap(null);
       });
     });
 
@@ -226,22 +262,19 @@ export default class Controller {
     marker.addListener("click", () => {
       setInfoWindowForm();
       infowindow.open(this.map, marker);
-
-      // Add a delete button to the form
-      infowindow.setContent(
-        infowindow.getContent() +
-          '<button id="deleteMarker">Remove Stop</button>'
-      );
-
-      // When InfoWindow is ready, add a click listener to the delete button
-      google.maps.event.addListener(infowindow, "domready", () => {
-        document
-          .getElementById("deleteMarker")
-          .addEventListener("click", () => {
-            marker.setMap(null);
-          });
-      });
     });
+  }
+
+  clearAllMarkers() {
+    for (let i = 0; i < this.markersArray.length; i++) {
+      this.markersArray[i].setMap(null);
+    }
+    this.markersArray.length = 0;
+  }
+
+  resetMap() {
+    this.map.setCenter({ lat: 51.1784, lng: -115.5708 });
+    this.map.setZoom(3);
   }
 
   tripBoxAppend = function (trip) {
@@ -251,6 +284,13 @@ export default class Controller {
     tripSpan.textContent = trip;
 
     tripDiv.appendChild(tripSpan);
+    //////////////
+    tripDiv.addEventListener("click", () => {
+      const myTrip = tripSpan.textContent;
+      this.mapGeocoder(myTrip);
+      heroView.closeMyTripsModel();
+    });
+    ///////////
     document.querySelector(".trip-box").appendChild(tripDiv);
   };
 }

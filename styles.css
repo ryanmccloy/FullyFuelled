@@ -345,6 +345,7 @@ body.map-box-visible .hero {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 #marker-input {
