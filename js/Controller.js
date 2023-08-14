@@ -131,6 +131,7 @@ export default class Controller {
       prompt("Account not found, please create one! ✈️");
     }
     this.signedin = true;
+    this.addUserMarker(this.currentUser);
 
     // Displaying trips in my trips
 
@@ -293,6 +294,116 @@ export default class Controller {
     ///////////
     document.querySelector(".trip-box").appendChild(tripDiv);
   };
+
+  addUserMarker(curUser) {
+    const curUserMarkers = [...curUser.markers];
+
+    for (let i = 0; i < curUserMarkers.length; i++) {
+      ///////////
+      const marker = new google.maps.Marker({
+        position: curUserMarkers[i].position,
+        map: this.map,
+      });
+      this.markersArray.push(marker);
+
+      // Store user's input for this marker
+      let userInput = "";
+
+      // Create an InfoWindow
+      const infowindow = new google.maps.InfoWindow();
+
+      // Function to set the InfoWindow content to a form with the user's input
+      const setInfoWindowForm = () => {
+        infowindow.setContent(`
+
+        <form id="marker-form">
+            <textarea id="marker-input" type="text" placeholder="Start Planning...">${curUserMarkers[i].content}</textarea>
+            <input id="info-save" type="submit" value="Save" />
+            <button id="deleteMarker">Remove Stop</button>
+        </form>
+
+        `);
+      };
+
+      // Set the InfoWindow content initially
+      setInfoWindowForm();
+
+      // Listen for the form submit event in the InfoWindow
+      google.maps.event.addListener(infowindow, "domready", () => {
+        document
+          .getElementById("marker-form")
+          .addEventListener("submit", (e) => {
+            e.preventDefault();
+            // Get the user's input
+            userInput = document.getElementById("marker-input").value;
+            // Set the InfoWindow's content to the user's input
+            infowindow.setContent(userInput);
+            // Close the infowindow
+            infowindow.close();
+
+            // Storing markers to users local storage
+            if (this.signedin) {
+              this.currentUser.markers.push({
+                position: this.markersArray[i].position,
+                content: userInput,
+              });
+              const usersJson = localStorage.getItem("users");
+              const users = usersJson ? JSON.parse(usersJson) : [];
+
+              // Find the index of the currentUser in the users array
+              const index = users.findIndex(
+                (user) => user.email === this.currentUser.email
+              );
+              if (index !== -1) {
+                users[index] = this.currentUser; // Replace the old data with the updated one
+                localStorage.setItem("users", JSON.stringify(users)); // Save back to localStorage
+              }
+            }
+          });
+
+        document
+          .getElementById("deleteMarker")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            marker.setMap(null);
+
+            // Identify and remove the marker data from curUserMarkers
+            const markerIndex = curUserMarkers.findIndex(
+              (m) =>
+                m.position.lat === marker.getPosition().lat() &&
+                m.position.lng === marker.getPosition().lng()
+            );
+
+            if (markerIndex !== -1) {
+              curUserMarkers.splice(markerIndex, 1);
+            }
+
+            // Update currentUser.markers
+
+            this.currentUser.markers = curUserMarkers;
+
+            // Update the local storage
+            const usersJson = localStorage.getItem("users");
+            const users = usersJson ? JSON.parse(usersJson) : [];
+
+            // Find the index of the currentUser in the users array
+            const userIndex = users.findIndex(
+              (user) => user.email === this.currentUser.email
+            );
+            if (userIndex !== -1) {
+              users[userIndex] = this.currentUser; // Replace the old data with the updated one
+              localStorage.setItem("users", JSON.stringify(users)); // Save back to localStorage
+            }
+          });
+      });
+
+      // Add a click listener to the marker to open the InfoWindow
+      marker.addListener("click", () => {
+        setInfoWindowForm();
+        infowindow.open(this.map, marker);
+      });
+    }
+  }
 }
 
 //////////////
