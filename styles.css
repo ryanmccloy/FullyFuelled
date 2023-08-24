@@ -170,6 +170,7 @@ body {
   border: 2px solid var(--primary-color);
   height: 95%;
   width: 100%;
+  min-height: 600px;
 }
 
 .distance {
@@ -382,8 +383,71 @@ body.map-box-visible .hero {
 
 /* Media Queries */
 
-/* @media screen and (max-width: 991px) {
+@media screen and (max-width: 991px) {
   .hero {
     min-height: 800px;
   }
-} */
+
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .nav-bar {
+    padding-top: 15px;
+  }
+
+  .logo {
+    font-size: 50px;
+  }
+
+  .nav-bar-link {
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 90%;
+    padding: 3px 5px;
+  }
+
+  .nav-links {
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+  }
+
+  .hero-heading {
+    margin-top: 150px;
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+  .search-form {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    margin-top: 15px;
+  }
+
+  .search-bar {
+    width: 300px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .search-button {
+    padding: 7px 15px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .map-box {
+    top: 150px;
+    width: calc(100% - 60px);
+  }
+
+  .map {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    border: 2px solid var(--primary-color);
+    height: 95%;
+    width: 100%;
+    min-height: 600px;
+  }
+}
