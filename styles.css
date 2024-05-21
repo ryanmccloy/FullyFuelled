@@ -1,0 +1,453 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Racing+Sans+One&display=swap");
+
+:root {
+  --primary-color: #494e54;
+  --secondary-color: #616b6a;
+  --tertiary-color: #678585;
+  --fourth-color: #cfcabf;
+  --fifth-color: #71aac3;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  color: var(--primary-color);
+  font-weight: 400;
+  background-color: var(--fourth-color);
+}
+
+.section {
+  width: calc(100vw - (100vw - 100%));
+  max-width: 2400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero {
+  height: 100vh;
+  max-height: 1600px;
+  min-height: 800px;
+  background-image: linear-gradient(
+      rgba(55, 26, 21, 0.3),
+      rgba(55, 26, 21, 0.3)
+    ),
+    url(img/hero-pic.jpg);
+  background-size: auto, cover;
+  background-position: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-container {
+  position: relative;
+}
+
+.container {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30px;
+  padding-right: 5px;
+  position: relative;
+}
+
+.logo {
+  color: var(--primary-color);
+  margin-top: 0;
+  font-family: Racing Sans One, sans-serif;
+  font-size: 80px;
+  line-height: 101px;
+  cursor: pointer;
+}
+
+.nav-bar-link {
+  color: var(--fourth-color);
+  letter-spacing: 0.22px;
+  font-size: 22px;
+  font-weight: 400;
+  text-decoration: none;
+  background-color: var(--tertiary-color);
+  border-radius: 4px;
+  border: 1px solid var(--secondary-color);
+  opacity: 90%;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-bar-link:hover {
+  color: var(--primary-color);
+  background-color: var(--fourth-color);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
+
+.hero-heading {
+  color: var(--fourth-color);
+  text-align: center;
+  margin-top: 200px;
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 120px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  margin-top: 30px;
+}
+
+.search-bar {
+  width: 440px;
+  height: 60px;
+  color: var(--primary-color);
+  text-align: center;
+  background-color: var(--fourth-color);
+  opacity: 70%;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  font-size: 26px;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+
+.search-button {
+  color: var(--fourth-color);
+  background-color: var(--tertiary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  padding: 10px 30px;
+  font-size: 20px;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  opacity: 90%;
+  margin-top: 15px;
+}
+
+.search-button:hover {
+  color: var(--primary-color);
+  background-color: var(--fourth-color);
+}
+
+.map-box {
+  position: absolute;
+  top: 190px;
+  width: calc(100% - 120px);
+  height: calc(100vh - 250px);
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.map {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  border: 2px solid var(--primary-color);
+  height: 95%;
+  width: 100%;
+  min-height: 600px;
+}
+
+.distance {
+  margin-top: 1%;
+}
+
+.trip-stops {
+  padding-bottom: 90px;
+}
+
+.pin {
+  color: var(--fourth-color);
+  font-size: 60px;
+  margin-left: 30px;
+  position: relative;
+}
+
+.pin span {
+  position: absolute;
+  top: 0%;
+  left: 25%;
+  color: var(--primary-color);
+}
+
+.stop-save {
+  width: 100px;
+  height: 40px;
+  background-color: var(--primary-color);
+  color: var(--fourth-color);
+  border-radius: 4px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+/* JS Manipulation Classes */
+
+.hidden {
+  display: none;
+}
+
+.overlay {
+  background-color: var(--fourth-color);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  opacity: 50%;
+  z-index: 10;
+}
+
+body.map-box-visible .hero {
+  background-image: none;
+  background-color: var(--fourth-color);
+}
+
+.model {
+  background-color: var(--primary-color);
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid var(--fourth-color);
+  border-radius: 4px;
+  z-index: 100;
+}
+
+.trip-box {
+  padding: 60px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+}
+
+.trip {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 30px;
+  background-color: var(--fourth-color);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.trip:hover {
+  background-color: var(--tertiary-color);
+  color: var(--fourth-color);
+}
+
+.model-form {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.model-input {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 30px;
+}
+
+.model-input input {
+  font-size: 20px;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+
+.model-input input:focus {
+  outline: none;
+}
+
+.email {
+  width: 100%;
+  height: 100%;
+}
+
+.password {
+  width: 100%;
+  height: 100%;
+}
+
+.model-button {
+  color: var(--fourth-color);
+  background-color: var(--primary-color);
+  border: 1px solid var(--fourth-color);
+  border-radius: 4px;
+  padding: 10px 30px;
+  font-size: 20px;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.model-button:hover {
+  color: var(--primary-color);
+  background-color: var(--fourth-color);
+}
+
+.stop-box {
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stop {
+  height: 120px;
+  background-color: var(--primary-color);
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.stop-info {
+  background-color: var(--fourth-color);
+  border: 1px solid var(--primary-color);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#marker-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+#marker-input {
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: 400;
+  width: 200px;
+  height: 200px;
+}
+
+#info-save {
+  margin-top: 10px;
+  font-family: Poppins, sans-serif;
+  font-size: 12px;
+  color: var(--fourth-color);
+  font-weight: 400;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+#deleteMarker {
+  display: block;
+  margin: auto;
+  background-color: var(--fourth-color);
+  font-family: Poppins, sans-serif;
+  font-size: 12px;
+  color: var(--primary-color);
+  font-weight: 400;
+  border-radius: 4px;
+  border: 1px solid var(--primary-color);
+  margin-top: 10px;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 991px) {
+  .hero {
+    min-height: 800px;
+  }
+
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .nav-bar {
+    padding-top: 15px;
+  }
+
+  .logo {
+    font-size: 50px;
+  }
+
+  .nav-bar-link {
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 90%;
+    padding: 3px 5px;
+  }
+
+  .nav-links {
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+  }
+
+  .hero-heading {
+    margin-top: 150px;
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+  .search-form {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    margin-top: 15px;
+  }
+
+  .search-bar {
+    width: 300px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .search-button {
+    padding: 7px 15px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .map-box {
+    top: 150px;
+    width: calc(100% - 60px);
+  }
+
+  .map {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    border: 2px solid var(--primary-color);
+    height: 95%;
+    width: 100%;
+    min-height: 600px;
+  }
+}

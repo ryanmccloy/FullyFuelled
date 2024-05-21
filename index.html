@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer type="module" src="js/Controller.js"></script>
+
+    <script
+      src="https://kit.fontawesome.com/c2178b4ef2.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Fully Fuelled</title>
+  </head>
+  <body>
+    <div class="overlay hidden"></div>
+    <section class="section hero">
+      <div class="container hero-container">
+        <div class="nav-bar">
+          <div class="logo">Fully Fuelled</div>
+          <div class="nav-links">
+            <a href="#" class="nav-bar-link sign-up">Sign up</a>
+            <a href="#" class="nav-bar-link log-in">Log In</a>
+            <a href="#" class="nav-bar-link my-trips-link hidden">My Trips</a>
+            <a href="#" class="nav-bar-link sign-out-link hidden">Sign out</a>
+          </div>
+        </div>
+        <div class="sign-up-model model hidden">
+          <form class="model-form sign-up-form">
+            <div class="model-input">
+              <input
+                type="email"
+                class="email sign-up-email"
+                name="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="model-input">
+              <input
+                type="password"
+                class="password sign-up-password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button type="submit" class="model-button">Sign Up</button>
+          </form>
+        </div>
+
+        <div class="log-in-model model hidden">
+          <form class="model-form log-in-form">
+            <div class="model-input">
+              <input
+                type="email"
+                class="email log-in-email"
+                name="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="model-input">
+              <input
+                type="password"
+                class="password log-in-password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button type="submit" class="model-button">Log In</button>
+          </form>
+        </div>
+
+        <div class="model trip-model hidden">
+          <div class="trip-box">
+            <!-- <div class="trip">
+              <span>Jasper</span>
+            </div> -->
+          </div>
+        </div>
+
+        <h1 class="hero-heading">Where are you going?</h1>
+        <form class="search-form">
+          <input
+            class="search-bar"
+            type="text"
+            name="location"
+            autocomplete="off"
+          />
+          <button class="search-button" type="submit">Start Planning</button>
+        </form>
+        <div class="map-box hidden">
+          <div class="map"></div>
+          <p class="distance">Total Distance: xxx</p>
+        </div>
+      </div>
+    </section>
+    <section class="section trip-stops hidden">
+      <div class="container">
+        <div class="stop-box">
+          <div class="stop">
+            <div class="pin">
+              <i class="fa-solid fa-location-pin"></i>
+              <span>1</span>
+            </div>
+          </div>
+          <div class="stop-info">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
+              adipisci atque vero cum soluta ipsam aliquid rerum maxime, ad
+              numquam nam iusto doloribus sunt perspiciatis exercitationem
+              delectus aperiam quam repellendus!
+            </p>
+            <button class="stop-save">Save</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
